@@ -8,7 +8,7 @@ namespace NWN.Core
 {
   public static partial class VM
   {
-    public static readonly Encoding Cp1252Encoding;
+    public static readonly Encoding Cp1250Encoding;
 
     static VM()
     {
@@ -18,7 +18,7 @@ namespace NWN.Core
       }
 
       Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-      Cp1252Encoding = Encoding.GetEncoding("windows-1252");
+      Cp1250Encoding = Encoding.GetEncoding("windows-1250");
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
@@ -96,7 +96,7 @@ namespace NWN.Core
         return IntPtr.Zero;
       }
 
-      byte[] bytes = Cp1252Encoding.GetBytes(value);
+      byte[] bytes = Cp1250Encoding.GetBytes(value);
       IntPtr buffer = Marshal.AllocHGlobal(bytes.Length + 1);
       Marshal.Copy(bytes, 0, buffer, bytes.Length);
 
@@ -113,7 +113,7 @@ namespace NWN.Core
       }
 
       byte* charPointer = (byte*)cString;
-      return Cp1252Encoding.GetString(charPointer, GetStringLength(charPointer));
+      return Cp1250Encoding.GetString(charPointer, GetStringLength(charPointer));
     }
 
     private static unsafe int GetStringLength(byte* cString)
